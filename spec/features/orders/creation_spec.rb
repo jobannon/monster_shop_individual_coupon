@@ -54,46 +54,20 @@ RSpec.describe("Order Creation") do
 
       new_order = Order.last
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      expect(new_order.status).to eq('Pending')
+      expect(new_order.user_id).to eq(@user.id)
+      # expect(current_path).to eq("/orders/#{new_order.id}")
+      expect(current_path).to eq("/profile/orders")
+      expect(page).to have_link('Cart: 0')
+      expect(page).to have_content('Order created successfully')
+      expect(page).to have_content("Order ##{new_order.id}")
 
-      within '.shipping-address' do
-        expect(page).to have_content(name)
-        expect(page).to have_content(address)
-        expect(page).to have_content(city)
-        expect(page).to have_content(state)
-        expect(page).to have_content(zip)
-      end
-
-      within "#item-#{@paper.id}" do
-        expect(page).to have_link(@paper.name)
-        expect(page).to have_link("#{@paper.merchant.name}")
-        expect(page).to have_content("$#{@paper.price}")
-        expect(page).to have_content("2")
-        expect(page).to have_content("$40")
-      end
-
-      within "#item-#{@tire.id}" do
-        expect(page).to have_link(@tire.name)
-        expect(page).to have_link("#{@tire.merchant.name}")
-        expect(page).to have_content("$#{@tire.price}")
-        expect(page).to have_content("1")
-        expect(page).to have_content("$100")
-      end
-
-      within "#item-#{@pencil.id}" do
-        expect(page).to have_link(@pencil.name)
-        expect(page).to have_link("#{@pencil.merchant.name}")
-        expect(page).to have_content("$#{@pencil.price}")
-        expect(page).to have_content("1")
-        expect(page).to have_content("$2")
-      end
-
-      within "#grandtotal" do
-        expect(page).to have_content("Total: $142")
-      end
-
-      within "#datecreated" do
-        expect(page).to have_content(new_order.created_at)
+      within "#order-#{new_order.id}" do
+        expect(page).to have_content("Placed On: #{new_order.created_at}")
+        expect(page).to have_content("Last Updated: #{new_order.updated_at}")
+        expect(page).to have_content("Current Status: #{new_order.status}")
+        expect(page).to have_content("Total Items: #{new_order.items.length}")
+        expect(page).to have_content("Grand Total: $#{new_order.grandtotal}")
       end
     end
 
@@ -115,7 +89,5 @@ RSpec.describe("Order Creation") do
       expect(page).to have_content("Please complete address form to create an order.")
       expect(page).to have_button("Create Order")
     end
-
-
   end
 end

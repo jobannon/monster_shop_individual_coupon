@@ -37,15 +37,14 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/profile', to: "sessions#show"
 
-
   get "/users/:id/edit", to: "users#edit"
   patch "/users/:id/edit", to: "users#update"
 
-
   namespace :admin do
     get '/dashboard', to: 'dashboard#index'
-    get '/users', to: 'users#index'
     get '/merchants/:merchant_id', to: 'merchants#show'
+    get '/users', to: 'users#index'
+    get '/users/:id', to: 'users#show'
   end
 
   namespace :merchant do

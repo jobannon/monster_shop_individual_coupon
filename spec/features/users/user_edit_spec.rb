@@ -87,25 +87,3 @@ RSpec.describe 'User Can Edit their Profile Data' do
     expect(page).to have_selector("input[value='80123']")
   end
 end
-
-# As a registered user
-# When I attempt to edit my profile data
-# If I try to change my email address to one that belongs to another user
-# When I submit the form
-# Then I am returned to the profile edit page
-#
-#  And I see a flash message telling me that email address is already in use
-
-# User Story 20, User Can Edit their Profile Data
-#
-# As a registered user
-# When I visit my profile page
-# I see a link to edit my profile data
-# When I click on the link to edit my profile data
-# I see a form like the registration page
-# The form is prepopulated with all my current information except my password
-# When I change any or all of that information
-# And I submit the form
-# Then I am returned to my profile page
-# And I see a flash message telling me that my data is updated
-# And I see my updated information

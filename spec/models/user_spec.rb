@@ -1,15 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'relationships' do 
-    it {should belong_to :merchant}
-  end 
   describe 'relationships' do
     it {should have_many :orders}
     it {should belong_to :merchant}
   end
-
-
 
   describe 'roles' do
     before :each do
@@ -45,7 +40,6 @@ RSpec.describe User, type: :model do
         password: 'pass153',
       )
     end
-
 
     it 'can be created as an admin' do
       expect(@admin_user.role).to eq('admin')

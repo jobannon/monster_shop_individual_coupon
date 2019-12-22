@@ -3,3 +3,20 @@
 
 <%= link_to 'View all users', '/admin/users' %>
 <%= link_to 'Update password', '/user/edit-pw', class: 'btn btn-success' %>
+
+<br><br>
+<hr>
+<br>
+<h1>Orders in the System:</h1>
+<br>
+<table class="table" id="orders">
+  <th>User</th><th>Order ID</th><th>Date Order Created</th><th>Order Status</th>
+  <% @orders.each do |order| %>
+    <tr id="order-<%= order.id %>">
+      <td><%= link_to order.user.name, "/admin/users/#{order.user_id}" %></td>
+      <td><%= order.id %></td>
+      <td><%= order.created_at %></td>
+      <td><%= order.status %></td>
+    </tr>
+  <% end %>
+</table>

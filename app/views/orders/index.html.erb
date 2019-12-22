@@ -1,10 +1,12 @@
 <h1>Your Orders</h1>
 
 <% @orders.each do |order| %>
-  <h5><%= link_to "Order ##{order.id}", "/profile/orders/#{order.id}" %></h5>
-  <p>Placed on: <%= order.created_at %></p>
-  <p>Last updated: <%= order.updated_at %></p>
-  <p>Current Status: <%= order.status %></p>
-  <p>Total Items: <%= order.items.length %></p>
-  <p>Grand Total: $<%= order.grandtotal %></p>
+  <section id="order-<%= order.id %>">
+    <h5><%= link_to "Order ##{order.id}", "/profile/orders/#{order.id}" %></h5>
+    <p>Placed On: <%= order.created_at %></p>
+    <p>Last Updated: <%= order.updated_at %></p>
+    <p>Current Status: <%= order.status %></p>
+    <p>Total Items: <%= order.items.length %></p>
+    <p>Grand Total: $<%= order.grandtotal %></p>
+  </section>
 <% end %>

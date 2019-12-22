@@ -15,6 +15,15 @@ RSpec.describe("New Order Page") do
 
       click_button 'Log In'
 
+      @user = create :random_reg_user_test
+
+      visit '/login'
+
+      fill_in :email, with: @user.email
+      fill_in :password, with: 'password'
+
+      click_button 'Log In'
+
       visit "/items/#{@paper.id}"
       click_on "Add To Cart"
       visit "/items/#{@paper.id}"

@@ -1,0 +1,12 @@
+<h1> <%= @user.name %>'s Profile Page </h1><br/><br/>
+
+  <%= @user.name %><br/>
+  <%= @user.address %><br/>
+  <%= @user.city %><br/>
+  <%= @user.state %><br/>
+  <%= @user.zip %><br/>
+  <%= @user.email %><br/><br/>
+
+  <%=link_to "Edit #{@user.name}'s Profile", "/users/#{@user.id}/edit" %>
+  <%= link_to "Update #{@user.name}'s password", '/user/edit-pw', class: 'btn btn-success' %>
+  <%= link_to "#{@user.name}'s Orders", '/profile/orders', class: 'btn btn-secondary' %>

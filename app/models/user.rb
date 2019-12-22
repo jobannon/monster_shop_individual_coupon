@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
   validates :email, uniqueness: true, presence: true
   has_many :orders, dependent: :destroy
+  
   belongs_to :merchant, optional: true 
 
   has_secure_password
