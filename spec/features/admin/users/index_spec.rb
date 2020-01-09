@@ -60,6 +60,17 @@ RSpec.describe 'User index page', type: :feature do
         expect(page).to have_content(@user_regular.created_at)
         expect(page).to have_content(@user_regular.role)
       end
+
+      within "#user-#{@user_regular.id}" do
+        click_button "Deactivate"
+      end
+      expect(page).to have_content("User Deactivated")
+
+      within "#user-#{@user_regular.id}" do
+        click_button "Activate"
+      end
+      expect(page).to have_content("User Activated")
+
     end
   end
 end
