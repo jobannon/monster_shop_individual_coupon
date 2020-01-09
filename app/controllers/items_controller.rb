@@ -23,8 +23,6 @@ class ItemsController<ApplicationController
     item = @merchant.items.create(item_params)
     if item.save
       redirect_to '/merchant/items'
-      # and return if current_user && current_user.merchant?
-      # redirect_to "/merchants/#{@merchant.id}/items"
     else
       flash[:error] = item.errors.full_messages.to_sentence
       render :new
