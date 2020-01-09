@@ -37,7 +37,9 @@ RSpec.describe 'Merchant Order Show Page' do
 
       within "#item-#{@item.id}" do
         click_button "Fulfill"
-        expect(page).to have_button("Unfulfill")
+        click_button 'Unfulfill'
+
+        expect(page).to have_button('Fulfill')
       end
     end
   end
