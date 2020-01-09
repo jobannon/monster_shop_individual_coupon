@@ -1,12 +1,5 @@
-<h1> <%= @user.name %>'s Profile Page </h1><br/><br/>
 
-  <%= @user.name %><br/>
-  <%= @user.address %><br/>
-  <%= @user.city %><br/>
-  <%= @user.state %><br/>
-  <%= @user.zip %><br/>
-  <%= @user.email %><br/><br/>
-
-  <%=link_to "Edit Profile", "/users/#{@user.id}/edit" %>
-  <%= link_to 'Update password', '/user/edit-pw', class: 'btn btn-success' %>
-  <%= link_to 'My Orders', '/profile/orders', class: 'btn btn-secondary' %>
+  <%= render partial: 'common/profile', locals: { edit_path: "users/#{@user.id}/edit",
+                                                edit_pw_path: '/user/edit-pw',
+                                                order_show_text: 'My Orders',
+                                                order_path: '/profile/orders'} %>

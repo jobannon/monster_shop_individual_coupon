@@ -1,0 +1,7 @@
+<h1>Edit Profile</h1>
+<br>
+<%= render partial: 'users/form', locals: {
+                                      path: "/users/#{@new_user.id}/edit",
+                                      method: :patch,
+                                      button_text: 'Save Changes'
+                                    } %>
