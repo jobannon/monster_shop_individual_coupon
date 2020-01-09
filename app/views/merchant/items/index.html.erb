@@ -1,4 +1,7 @@
 <h1> My Items </h1>
+<hr>
+<%= link_to 'Add Item', "/merchants/#{current_user.merchant_id}/items/new" %>
+<hr>
 <table>
   <thead>
     <th>Item</th>
@@ -22,4 +25,3 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to 'Add Item', "/merchants/#{current_user.merchant_id}/items/new" %>

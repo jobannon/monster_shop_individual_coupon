@@ -23,7 +23,7 @@ RSpec.describe 'When a merchant fulfills an order it changes order status from p
       click_link "#{@order.id}"
     end
 
-    within "#item-#{@item_order_1.item_id}" do
+    within "#item-order-#{@item_order_1.id}" do
       click_button 'Fulfill'
       expect(page).to have_button('Unfulfill')
     end

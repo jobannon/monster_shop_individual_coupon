@@ -32,7 +32,7 @@ RSpec.describe 'Merchant Order Show Page' do
       expect(current_path).to eq("/merchant/orders/#{@order.id}")
 
       @order.item_orders.each do |item_order|
-        within "#item-#{item_order.item_id}" do
+        within "#item-order-#{item_order.id}" do
           expect(page).to have_css("img[src*='#{item_order.item.image}']")
           expect(page).to have_link(item_order.item.name)
           expect(page).to have_content("$#{item_order.price}")

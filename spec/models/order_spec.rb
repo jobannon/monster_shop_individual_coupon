@@ -23,8 +23,8 @@ describe Order, type: :model do
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
       @user_1 = create :random_reg_user_test
-       
-      
+
+
       @order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user_id: @user_1.id)
 
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
@@ -37,7 +37,7 @@ describe Order, type: :model do
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
     end
-    
+
     it 'merchant_grandtotal' do
       expect(@order_1.merchant_grandtotal(@brian)).to eq('30.00')
     end
@@ -87,10 +87,6 @@ describe Order, type: :model do
       @order_3.update(status: 0) # change status to pending
       @order_4.update(status: 1) # change status to packaged
       expect(Order.custom_sort).to eq([@order_5, @order_6, @order_4, @order_3, @order_2, @order_1])
-    end
-
-    it 'packaged orders' do
-      expect(Order.packaged).to eq([@order_5, @order_6])
     end
   end
 end

@@ -23,7 +23,7 @@ RSpec.describe 'Merchant Order Show Page' do
       end
 
       @order.item_orders.each do |item_order|
-        within "#item-#{item_order.item_id}" do
+        within "#item-order-#{item_order.id}" do
           expect(@item.inventory).to eq(10)
           click_button 'Fulfill'
           item = Item.last
@@ -47,8 +47,8 @@ RSpec.describe 'Merchant Order Show Page' do
       click_button 'Log In'
 
       visit "/merchant/orders/#{order_2.id}"
-      
-      within "#item-#{item_order_2.item_id}" do
+
+      within "#item-order-#{item_order_2.id}" do
         expect(page).to have_button('Not Enough Inventory', disabled: true)
       end
     end

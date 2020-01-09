@@ -3,27 +3,25 @@
 <table>
 <th></th><th>Name</th><th>Price</th><th>Quantity</th> <th>My Inventory</th> <th>Fulfill?</th>
 <% @item_orders.each do |item_order|%>
-  <tr>
-  <section id = "item-<%=item_order.item_id%>">
-      <td><img src="<%= item_order.item.image %>" style="width:75px;height:75px;"></td>
-      <td><p><%=link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
-      <td><p><%= number_to_currency(item_order.price)%></p></td>
-      <td><p><%= item_order.quantity%></p></td>
-      <td><p><%= item_order.item.inventory %></p></td>
+  <tr id = "item-order-<%=item_order.id%>">
+    <td><img src="<%= item_order.item.image %>" style="width:75px;height:75px;"></td>
+    <td><%=link_to item_order.item.name, "/items/#{item_order.item_id}"%></td>
+    <td><%= number_to_currency(item_order.price)%></td>
+    <td><%= item_order.quantity%></td>
+    <td><%= item_order.item.inventory %></td>
 
-      <% if @current_order.status == "Cancelled" %>
-      <td><%= button_to "User Cancelled", "/merchant/orders/#{item_order.id}", method: :patch, class: 'btn btn-primary', disabled: true %></td>
+    <% if @current_order.status == "Cancelled" %>
+    <td><%= button_to "User Cancelled", "/merchant/orders/#{item_order.id}", method: :patch, class: 'btn btn-primary', disabled: true %></td>
 
-      <% elsif item_order.fulfilled_by_merchant %>
-        <td><%= button_to "Unfulfill", "/merchant/orders/#{item_order.id}", method: :patch %></td>
+    <% elsif item_order.fulfilled_by_merchant %>
+      <td><%= button_to "Unfulfill", "/merchant/orders/#{item_order.id}", method: :patch %></td>
+    <% else %>
+      <% if item_order.item.inventory > item_order.quantity %>
+        <td><%= button_to "Fulfill", "/merchant/orders/#{item_order.id}", method: :patch %></td>
       <% else %>
-        <% if item_order.item.inventory > item_order.quantity %>
-          <td><%= button_to "Fulfill", "/merchant/orders/#{item_order.id}", method: :patch %></td>
-        <% else %>
-          <td><%= button_to "Not Enough Inventory", "/merchant/orders/#{item_order.id}", method: :patch, class: 'btn btn-primary', disabled: true %></td>
-        <% end %>
+        <td><%= button_to "Not Enough Inventory", "/merchant/orders/#{item_order.id}", method: :patch, class: 'btn btn-primary', disabled: true %></td>
       <% end %>
-    </section>
+    <% end %>
   </tr>
 <% end %>
 </table>

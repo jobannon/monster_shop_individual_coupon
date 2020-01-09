@@ -15,13 +15,13 @@ RSpec.describe "Create Merchant Items" do
     end
 
     it 'I see a link to add a new item for that merchant' do
-      visit "/merchants/#{@brian.id}/items"
+      visit "/merchant/items"
 
-      expect(page).to have_link "Add New Item"
+      expect(page).to have_link "Add Item"
     end
 
     it 'I can add a new item by filling out a form' do
-      visit "/merchants/#{@brian.id}/items"
+      visit "/merchant/items"
 
       name = "Chamois Buttr"
       price = 18
@@ -29,7 +29,7 @@ RSpec.describe "Create Merchant Items" do
       image_url = "https://images-na.ssl-images-amazon.com/images/I/51HMpDXItgL._SX569_.jpg"
       inventory = 25
 
-      click_on "Add New Item"
+      click_on "Add Item"
 
       expect(page).to have_link(@brian.name)
       expect(current_path).to eq("/merchants/#{@brian.id}/items/new")
@@ -55,7 +55,7 @@ RSpec.describe "Create Merchant Items" do
     end
 
     it 'I get an alert if I dont fully fill out the form' do
-      visit "/merchants/#{@brian.id}/items"
+      visit "/merchant/items"
 
       name = ""
       price = 18
@@ -63,7 +63,7 @@ RSpec.describe "Create Merchant Items" do
       image_url = "https://images-na.ssl-images-amazon.com/images/I/51HMpDXItgL._SX569_.jpg"
       inventory = ""
 
-      click_on "Add New Item"
+      click_on "Add Item"
 
       fill_in :name, with: name
       fill_in :price, with: price

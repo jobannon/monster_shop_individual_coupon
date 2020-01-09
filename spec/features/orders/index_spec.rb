@@ -7,8 +7,6 @@ RSpec.describe 'as a user when i visit my orders page', type: :feature do
 
     visit '/login'
 
-    visit '/login'
-
     fill_in :email, with: @user.email
     fill_in :password, with: 'password'
 
@@ -25,5 +23,16 @@ RSpec.describe 'as a user when i visit my orders page', type: :feature do
     expect(page).to have_content(@orders[1].status)
     expect(page).to have_content(@orders[2].id)
     expect(page).to have_content(@orders[2].status)
+  end
+
+  it 'Displays 404 error when visitor attempts to view orders page' do
+
+    click_on 'Log Out'
+
+    visit '/profile/orders'
+    expect(page).to have_content('404 Page Not Found')
+
+    visit '/orders'
+    expect(page).to have_content('404 Page Not Found')
   end
 end

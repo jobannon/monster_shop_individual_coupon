@@ -18,6 +18,10 @@ class Order < ApplicationRecord
   def merchant_grandtotal(merchant)
     '%.2f' % items.where(merchant: merchant).sum("item_orders.price * item_orders.quantity")
   end
+  
+  def merchant_orders(merchant_id)
+    item_orders.joins(:item).where('items.merchant_id = ?', merchant_id)
+  end
 
   def merchant_total_quantity(merchant)
     items.where(merchant: merchant).sum("item_orders.quantity")
@@ -28,18 +32,6 @@ class Order < ApplicationRecord
     sort_order = ['Packaged','Pending','Shipped','Cancelled']
     sorted = orders.sort_by do |order|
       sort_order.index(order.status)
-    end
-  end
-
-  def self.packaged
-    self.where(status: 'Packaged')
-  end
-
-  def order_status
-    if self.item_orders.all? { |item_order| item_order.fulfilled_by_merchant == true }
-      'Packaged'
-    else
-      self.status
     end
   end
 end

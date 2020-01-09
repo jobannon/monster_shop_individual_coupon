@@ -8,10 +8,6 @@ class OrderStatusController < ApplicationController
       end
       flash[:happy] = 'Your order has been cancelled'
       redirect_to '/profile'
-    elsif params[:status] == 'shipped'
-      order.update(status: 2)
-      flash[:happy] = 'Order has been shipped'
-      redirect_to '/admin/dashboard'
     end
   end
 end

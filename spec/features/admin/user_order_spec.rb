@@ -65,7 +65,21 @@ RSpec.describe 'as an admin when i visit a user profile', type: :feature do
 
     click_button 'Ship Order'
     expect(current_path).to eq('/admin/dashboard')
+  end
 
+  it 'can delete an order for a user' do
+    @order.update!(status: 1)
+    visit '/login'
+
+    fill_in :email, with: @admin.email
+    fill_in :password, with: 'password'
+
+    click_button 'Log In'
+
+    visit "/admin/users/#{@user.id}/orders/#{@order.id}"
+
+    click_button 'Cancel Order'
+    expect(page).to have_content("User order has been cancelled")
   end
 
 end

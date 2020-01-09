@@ -66,10 +66,6 @@ Rails.application.routes.draw do
     patch '/items/:id', to: 'items#update'
   end
 
-  unless Rails.application.config.consider_all_requests_local
-    get '*path', to: 'errors#error_404', via: :all
-  end
-
   Rails.application.routes.draw do
     match '*path' => 'errors#error_404', via: :all
   end

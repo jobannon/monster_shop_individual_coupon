@@ -12,8 +12,6 @@ RSpec.describe "Items Index Page" do
       @user = create :random_reg_user_test
       @coffee = create_list(:item, 10, merchant: @meg, inventory: 10)
       @orders = create_list(:order, 10, user: @user)
-      #@orders[1].items << @coffee[1]
-      #@item_order = ItemOrder.create!(item_id: @coffee[1].id, order_id: @orders[1].id, 2, 3)
 
       User.destroy_all
       @user = User.create(

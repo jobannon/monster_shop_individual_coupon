@@ -14,11 +14,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit_pw
-    @user = User.find(current_user.id) if current_user
-    render '/errors/404' unless current_user
-  end
-
   def edit
     @new_user = User.find(params[:id])
   end
