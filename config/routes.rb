@@ -4,13 +4,11 @@ Rails.application.routes.draw do
 
   resources :merchants
 
-  resources :items, except: [:new, :create]
-
   resources :merchants do
     resources :items, only: [:index, :new, :create]
   end
 
-  resources :items do
+  resources :items, except: [:new, :create] do
     resources :reviews, only: [:new, :create]
   end
 
