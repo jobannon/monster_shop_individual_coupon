@@ -1,5 +1,4 @@
 <h1>Welcome, <%= @merchant.name %> merchant! </h1>
-  <%= link_to 'Update password', '/user/edit-pw', class: 'btn btn-success' %>
 <section id="merchant_dashboard-<%=@merchant.id%>">
   <p><%= @merchant.name %> </p>
   <p><%= @merchant.address %> </p>
@@ -7,20 +6,29 @@
   <p><%= @merchant.state %> </p>
   <p><%= @merchant.zip %> </p>
 </section>
-
+<%= link_to 'Update password', '/user/edit-pw', class: 'btn btn-success' %>
+<br><br>
+<hr>
 <section id="merchant_dashboard_orders">
   <% if @merchant.active_orders.count == 0 %>
     <h2>Currently there are no active orders </h2>
   <%end%>
 <%= link_to "View Items for #{@merchant.name}", "/admin/#{@merchant.id}/items" %>
-
+<hr>
+<br>
 <section id="merchant_dashboard_orders">
   <table>
+    <th>Order Number</th>
+    <th>Created At</th>
+    <th>Total Qty</th>
+    <th>Total Order Sum</th>
     <% @merchant.active_orders.each do |order| %>
-      <tr>  <p>Order number: <%= link_to order.id, "/merchant/orders/#{order.id}" %></p> </tr>
-      <tr><p>Created At:   <%= order.created_at %></p></tr>
-      <tr><p>Total Qty:    <%= order.merchant_total_quantity(@merchant) %></p></tr>
-      <tr><p>Total Order Sum: <%= order.merchant_grandtotal(@merchant) %> </p></tr>
+      <tr id="order-<%= order.id %>">
+        <td><%= link_to order.id, "/admin/merchant/#{@merchant.id}/orders/#{order.id}" %></td>
+        <td><%= order.created_at %></td>
+        <td><%= order.merchant_total_quantity(@merchant) %></td>
+        <td><%= order.merchant_grandtotal(@merchant) %></td>
+      </tr>
     <% end %>
     </table>
 </section>

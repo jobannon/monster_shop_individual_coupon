@@ -1,0 +1,27 @@
+<h1>Items on Order <%= @item_orders[0].order_id %></h1>
+<br>
+<table>
+<th></th><th>Name</th><th>Price</th><th>Quantity</th> <th>My Inventory</th> <th>Fulfill?</th>
+<% @item_orders.each do |item_order|%>
+  <tr id = "item-<%=item_order.item_id%>">
+    <td><img src="<%= item_order.item.image %>" style="width:75px;height:75px;"></td>
+    <td><p><%=link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
+    <td><p><%= number_to_currency(item_order.price)%></p></td>
+    <td><p><%= item_order.quantity%></p></td>
+    <td><p><%= item_order.item.inventory %></p></td>
+
+    <% if @item_orders[0].order.status == "Cancelled" %>
+    <td><%= button_to "User Cancelled", "/merchant/orders/#{item_order.id}", method: :patch, class: 'btn btn-primary', disabled: true %></td>
+
+    <% elsif item_order.fulfilled_by_merchant %>
+      <td><%= button_to "Unfulfill", "/admin/merchantorders/#{item_order.id}", method: :patch %></td>
+    <% else %>
+      <% if item_order.item.inventory > item_order.quantity %>
+        <td><%= button_to "Fulfill", "/admin/merchantorders/#{item_order.id}", method: :patch %></td>
+      <% else %>
+        <td><%= button_to "Not Enough Inventory", "/merchant/orders/#{item_order.id}", method: :patch, class: 'btn btn-primary', disabled: true %></td>
+      <% end %>
+    <% end %>
+  </tr>
+<% end %>
+</table>
