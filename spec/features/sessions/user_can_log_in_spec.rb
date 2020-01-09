@@ -13,6 +13,17 @@ RSpec.describe 'when a user logs in', type: :feature do
       password: 'pass123'
     )
 
+    @user_2 = User.create(
+      name: 'Gran Higgs',
+      email: 'sjinisbae@ex.com',
+      address: '123 mail',
+      city: 'Denver',
+      state: 'CO',
+      zip: '80123',
+      password: 'pass123',
+      active?: false
+    )
+
     @admin_user = User.create(
       name: 'Matt',
       email: 'werwer@sefsdfsdfsdfsdfsdf',
@@ -97,4 +108,14 @@ RSpec.describe 'when a user logs in', type: :feature do
     expect(current_path).to eq('/profile')
   end
 
+  it 'will fail to log in if user account is disabled' do
+    visit '/login'
+
+    fill_in :email, with: @user_2.email
+    fill_in :password, with: 'pass123'
+
+    click_button 'Log In'
+    expect(current_path).to eq('/login')
+    expect(page).to have_content('Account is Disabled')
+  end
 end
