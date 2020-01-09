@@ -63,11 +63,11 @@ RSpec.describe("Order Creation") do
       expect(page).to have_content("Order ##{new_order.id}")
 
       within "#order-#{new_order.id}" do
-        expect(page).to have_content("Placed On: #{new_order.created_at}")
-        expect(page).to have_content("Last Updated: #{new_order.updated_at}")
-        expect(page).to have_content("Current Status: #{new_order.status}")
-        expect(page).to have_content("Total Items: #{new_order.items.length}")
-        expect(page).to have_content("Grand Total: $#{new_order.grandtotal}")
+        expect(page).to have_content("#{new_order.created_at}")
+        expect(page).to have_content("#{new_order.updated_at}")
+        expect(page).to have_content("#{new_order.status}")
+        expect(page).to have_content("#{new_order.items.length}")
+        expect(page).to have_content("$#{new_order.grandtotal}")
       end
     end
 

@@ -21,8 +21,6 @@ RSpec.describe 'when a merchant visits the order index page', type: :feature do
       click_button 'Deactivate'
       expect(page).to have_button 'Activate'
     end
-
-    #expect(@active_items[0].active?).to be_false
   end
 
   it 'can activate an item' do
@@ -34,7 +32,5 @@ RSpec.describe 'when a merchant visits the order index page', type: :feature do
       expect(page).to have_button 'Deactivate'
 
     end
-
-    #expect(@inactive_items[0].active?).to be_true
   end
 end
