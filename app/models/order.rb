@@ -18,6 +18,10 @@ class Order < ApplicationRecord
   def merchant_grandtotal(merchant)
     '%.2f' % items.where(merchant: merchant).sum("item_orders.price * item_orders.quantity")
   end
+  
+  def merchant_orders(merchant_id)
+    item_orders.joins(:item).where('items.merchant_id = ?', merchant_id)
+  end
 
   def merchant_total_quantity(merchant)
     items.where(merchant: merchant).sum("item_orders.quantity")
