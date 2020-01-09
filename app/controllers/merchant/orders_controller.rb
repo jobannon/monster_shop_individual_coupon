@@ -5,9 +5,7 @@ class Merchant::OrdersController < Merchant::BaseController
 
   def show
     @current_order = Order.find(params[:id])
-    @item_orders = @current_order.item_orders
-                                  .joins(:item)
-                                  .where('items.merchant_id = ?', @current_user.merchant_id)
+    @item_orders = @current_order.merchant_orders(current_user.merchant_id)
   end
 
   def update
