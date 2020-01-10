@@ -77,7 +77,7 @@ RSpec.describe 'User Can Edit their Profile Data' do
     click_button 'Save Changes'
 
     expect(current_path).to eq("/users/#{user.id}/edit")
-    expect(page).to have_content('Email address already in use by another user, please enter a different email address')
+    expect(page).to have_content('Email has already been taken')
 
     expect(page).to have_selector("input[value='Granicus Higgins']")
     expect(page).to have_selector("input[value='lol@ex.com']")

@@ -62,7 +62,7 @@ RSpec.describe 'Admin can see user show page' do
     expect(page).to have_content(user_default_1.zip)
 
     expect(page).to have_no_link("Edit #{user_default_1.name}'s Profile")
-    expect(page).to have_link("Update #{user_default_1.name}'s password")
+    expect(page).to have_link("Update Password")
     expect(page).to have_link("#{user_default_1.name}'s Orders")
   end
 end

@@ -20,19 +20,11 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    email_in_use = User.where('id != ? and email = ?',params[:id],params[:email]).count
-    if email_in_use > 0
-      flash[:notice] = 'Email address already in use by another user, please enter a different email address'
-      @new_user = user
-      render :edit
-    end
     user.update(user_params)
     if user.save
-      flash[:notice] = "Data updated successfully"
-      redirect_to "/profile" if current_user.default?
-      redirect_to "/admin/users/#{@user.id}" if current_user.admin?
+      update_happy_path(user)
     else
-      flash[:notice] = "Data not saved"
+      update_sad_path(user)
     end
   end
 
@@ -40,5 +32,17 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit(:name, :address, :city, :state, :zip, :email, :password, :password_confirmation)
+  end
+
+  def update_happy_path(user)
+    flash[:happy] = "Data updated successfully"
+    redirect_to "/profile" and return if current_user.default?
+    redirect_to "/admin/users/#{user.id}" if current_user.admin?
+  end
+
+  def update_sad_path(user)
+    flash[:notice] = user.errors.full_messages.to_sentence
+    redirect_to "/admin/users/#{user.id}/edit" and return if current_user.admin?
+    redirect_to "/users/#{user.id}/edit" if current_user.default?
   end
 end

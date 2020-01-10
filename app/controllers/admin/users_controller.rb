@@ -14,9 +14,12 @@ class Admin::UsersController < Admin::BaseController
     elsif params[:status] == 'activate'
       activate(user)
     end
-
     redirect_back fallback_location: '/admin/users'
   end
+
+  def edit
+    @new_user = User.find(params[:id])
+  end 
 
   private
 

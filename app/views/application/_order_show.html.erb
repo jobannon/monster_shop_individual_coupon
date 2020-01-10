@@ -67,7 +67,7 @@
   <%= button_to 'Cancel Order', "/profile/orders/#{@order.id}?status=cancelled", method: :patch, class: 'btn btn-danger' unless @order.Cancelled? %>
 <% end %>
 
-<% if @current_user.admin? %> 
+<% if @current_user.admin? %>
   <%= button_to 'Cancel Order', "/admin/orders/#{@order.id}?status=cancelled", method: :patch, class: 'btn btn-danger' %>
   <%= button_to 'Ship Order',"/admin/orders/#{@order.id}?status=shipped", method: :patch, class: 'btn btn-warning' if @order.Packaged? %>
 <% end %>

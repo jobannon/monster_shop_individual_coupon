@@ -1,12 +1,21 @@
 <h1><%= @user.name %>'s Orders</h1>
+<table>
+    <th>Id</th>
+    <th>Placed On</th>
+    <th>Updated On</th>
+    <th>Current Status</th>
+    <th>Total Items</th>
+    <th>Grand Total</th>
+  <% @user.orders.each do |order| %>
 
-<% @user.orders.each do |order| %>
-  <section id="order-<%= order.id %>">
-    <h5><%= link_to "Order ##{order.id}", "/admin/users/#{@user.id}/orders/#{order.id}" %></h5>
-    <p>Placed On: <%= order.created_at %></p>
-    <p>Last Updated: <%= order.updated_at %></p>
-    <p>Current Status: <%= order.status %></p>
-    <p>Total Items: <%= order.items.length %></p>
-    <p>Grand Total: $<%= order.grandtotal %></p>
-  </section>
-<% end %>
+    <tr id="order-<%= order.id %>">
+      <td><%= link_to "Order ##{order.id}", "/admin/users/#{@user.id}/orders/#{order.id}" %></td>
+      <td><%= order.created_at %></td>
+      <td><%= order.updated_at %></td>
+      <td><%= order.status %></td>
+      <td><%= order.items.length %></td>
+      <td>$<%= order.grandtotal %></td>
+    </tr>
+
+  <% end %>
+</table>

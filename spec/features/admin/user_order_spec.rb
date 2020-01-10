@@ -19,7 +19,7 @@ RSpec.describe 'as an admin when i visit a user profile', type: :feature do
     click_button 'Log In'
 
     visit "/admin/users/#{@user.id}"
-    expect(page).to have_link("Update #{@user.name}'s password")
+    expect(page).to have_link("Update Password")
     expect(page).to have_link("#{@user.name}'s Orders")
   end
 

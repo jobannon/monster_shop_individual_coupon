@@ -45,6 +45,7 @@ RSpec.describe 'when a merchant visits the order index page', type: :feature do
       click_button 'Activate'
       expect(page).to have_button 'Deactivate'
     end
+
   end
 
   it 'can delete an item' do
