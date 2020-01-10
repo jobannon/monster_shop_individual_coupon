@@ -30,7 +30,7 @@ RSpec.describe 'Admin can update user info and password' do
     click_link 'Update Password'
 
     expect(current_path).to eq("/admin/users/#{@user.id}/edit-pw")
-    fill_in :new_password, with: 'newpassword'
+    fill_in :password, with: 'newpassword'
     fill_in :password_confirmation, with: 'newpassword'
     click_on 'Update Password'
 

@@ -1,7 +1,7 @@
 <h1>Edit <%= @user.name %>'s Password</h1>
 <%= form_tag "/admin/users/#{@user.id}/edit-pw", method: :patch do %>
-  <%= label_tag :new_password %>
-  <%= password_field_tag :new_password %><br>
+  <%= label_tag :password, 'New Password' %>
+  <%= password_field_tag :password %><br>
   <%= label_tag :password_confirmation, 'Confirm Password' %>
   <%= password_field_tag :password_confirmation %>
   <%= submit_tag 'Update Password' %>
