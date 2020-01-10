@@ -5,7 +5,10 @@
 <table>
   <thead>
     <th>Item</th>
+    <th>description</th>
+    <th>price</th>
     <th>Inventory</th>
+    <th>image</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +17,10 @@
   <% @merchant.items.each do |item|%>
   <tr id="item-<%= item.id %>">
     <td><%= link_to item.name, "/items/#{item.id}"  %> </td>
+    <td><%= item.description %></td>
+    <td><%= item.price %></td>
     <td><%= item.inventory %></td>
+    <td><%= image_tag item.image %></td>
     <td>
       <%= button_to 'Deactivate', "/merchant/items/#{item.id}?status=deactivate", method: :patch, class: 'btn btn-danger' if item.active? %>
       <%= button_to 'Activate', "/merchant/items/#{item.id}?status=activate", method: :patch, class: 'btn btn-success' if item.not_active? %>
