@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     patch '/merchants/:id', to: 'merchants#update'
     get '/merchant/:merchant_id/orders/:order_id', to: 'merchantorders#show'
     patch '/merchantorders/:item_order_id', to: 'merchantorders#update'
+    patch '/items/:id', to: 'items#update'
   end
 
   namespace :merchant do

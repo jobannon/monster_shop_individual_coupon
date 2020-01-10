@@ -1,5 +1,1 @@
-<h1> Items for this merchant </h1>
-
-  <% @merchant.items.each do |item|%>
-    <p><%= item.name  %> </p>
-  <% end %>
+<%= render partial: 'item_index' %>
