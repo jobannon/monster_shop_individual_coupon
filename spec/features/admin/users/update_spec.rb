@@ -44,4 +44,15 @@ RSpec.describe 'Admin can update user info and password' do
     click_button 'Log In'
     expect(current_path).to eq '/profile'
   end
+
+  it 'will fail to update password if password confirmation does not match' do
+    click_link 'Update Password'
+
+    fill_in :password, with: 'newpassword'
+    fill_in :password_confirmation, with: 'notnewpassword'
+    click_on 'Update Password'
+
+    expect(current_path).to eq("/admin/users/#{@user.id}/edit-pw")
+    expect(page).to have_content('Passwords do not match')
+  end
 end
