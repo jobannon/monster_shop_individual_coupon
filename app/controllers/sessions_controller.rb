@@ -5,7 +5,10 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if !user.active?
+      flash[:sad] = "Account is Disabled"
+      render :new
+    elsif user && user.authenticate(params[:password])
       user_redirect(user)
       session[:user_id] = user.id
       flash[:happy] = "Welcome, #{user.name}!"

@@ -43,6 +43,10 @@
   <% end %>
 </table>
 
+<section id="order_ID">
+  <p>Order Number: <%= @order.id %></p>  
+</section>
+
 <section id="status">
   <p>Current Status: <%=@order.status%></p>
 </section>
@@ -53,7 +57,10 @@
   <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
 </section>
 <section id="datecreated">
-  <p> Placed On: <%= @order.created_at%></p>
+  <p> Created At: <%= @order.created_at%></p>
+</section>
+<section id="datelastudpated">
+  <p> Updated At: <%= @order.updated_at%></p>
 </section>
 
 <% if @current_user.default? %>

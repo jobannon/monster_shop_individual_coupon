@@ -65,6 +65,9 @@ RSpec.describe 'as a user when i visit an orders show page', type: :feature do
       end
     end
 
+    within "#order_ID" do 
+      expect(page).to have_content(@order.id)
+    end 
     within "#status" do
       expect(page).to have_content(@order.status)
     end
@@ -79,6 +82,10 @@ RSpec.describe 'as a user when i visit an orders show page', type: :feature do
 
     within "#datecreated" do
       expect(page).to have_content(@order.created_at)
+    end
+
+    within "#datelastudpated" do
+      expect(page).to have_content(@order.updated_at)
     end
   end
 

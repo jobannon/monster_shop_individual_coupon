@@ -31,6 +31,14 @@ RSpec.describe 'Merchant Order Show Page' do
 
       expect(current_path).to eq("/merchant/orders/#{@order.id}")
 
+      within "#customer-information" do
+        expect(page).to have_content(@user.name)
+        expect(page).to have_content(@user.address)
+        expect(page).to have_content(@user.city)
+        expect(page).to have_content(@user.state)
+        expect(page).to have_content(@user.zip)
+      end
+
       @order.item_orders.each do |item_order|
         within "#item-order-#{item_order.id}" do
           expect(page).to have_css("img[src*='#{item_order.item.image}']")

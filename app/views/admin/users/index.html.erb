@@ -1,13 +1,17 @@
 <h1>Users</h1>
 <br>
 <table>
-  <th>Name</th><th>Email</th><th>Date Registered</th><th>Type</th>
+  <th>Name</th><th>Email</th><th>Date Registered</th><th>Type</th><th>Status</th>
   <% @users.each do |user| %>
     <tr id="user-<%= user.id %>">
       <td><%= link_to user.name, "/admin/users/#{user.id}" %></td>
       <td><%= user.email %></td>
       <td><%= user.created_at %></td>
       <td><%= user.role %></td>
+      <td>
+        <%= button_to 'Deactivate', "/admin/users/#{user.id}?status=deactivate", method: :patch, class: 'btn btn-danger' if user.active? %>
+        <%= button_to 'Activate', "/admin/users/#{user.id}?status=activate", method: :patch, class: 'btn btn-success' if !user.active? %>
+      </td>
     </tr>
   <% end %>
 </table>
