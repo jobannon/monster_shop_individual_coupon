@@ -20,11 +20,12 @@ class ItemsController<ApplicationController
 
   def create
     @merchant = Merchant.find(params[:merchant_id])
-    item = @merchant.items.create(item_params)
-    if item.save
+    @item = @merchant.items.create(item_params)
+    if @item.save
+      flash[:happy] = 'Item Created!'
       redirect_to '/merchant/items'
     else
-      flash[:error] = item.errors.full_messages.to_sentence
+      flash[:error] = @item.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -51,9 +52,9 @@ class ItemsController<ApplicationController
     item = Item.find(params[:id])
     Review.where(item_id: item.id).destroy_all
     item.destroy
+    flash[:happy] = 'Item Deleted'
     redirect_to '/merchant/items' and return if current_user && current_user.merchant?
     redirect_to "/items"
-    flash[:happy] = 'Item Deleted'
   end
 
   private
