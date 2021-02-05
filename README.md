@@ -1,4 +1,4 @@
-<img src="/app/assets/images/coverage-100-green.svg">
+
 
 # Welcome to CoffeeTown!   
 Rails project 
